@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Popular Movies</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="fixed top-0 left-0 bg-white shadow-md p-4 w-64 h-screen overflow-y-auto z-50">
+        <h2 class="text-lg font-bold mb-4">TMDB</h2>
+        <ul class="space-y-2">
+            <li>
+                <a href="/popular-movies" class="block hover:bg-gray-200 rounded-md p-2">Popular Movies</a>
+            </li>
+            <li>
+                <a href="/top-rated" class="block hover:bg-gray-200 rounded-md p-2">Top Rated</a>
+            </li>
+            <li>
+                <a href="/upcoming" class="block hover:bg-gray-200 rounded-md p-2">Upcoming</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Sidebar -->
+    <!-- Main Content-->
+    <div class="flex-1 ml-64 p-8">
+        <h1 class="text-3xl font-bold mb-6 text-center">Movie Stats</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Popular Movies Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <canvas id="movieTitlesChart"></canvas>
+            </div>
+            <!-- Popular Movies Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <canvas id="moviePopularitiesChart"></canvas>
+            </div>
+
+            <!-- Top Rated Movies Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold mb-4">Top Rated Movies</h2>
+                <canvas id="topRatedMoviesChart"></canvas>
+            </div>
+
+            <!-- Upcoming Movies Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold mb-4">Upcoming Movies</h2>
+                <canvas id="upcomingMoviesChart"></canvas>
+            </div>
+
+        </div>
+    </div>
+    <!-- Main Content-->
+</div>
+
+<script th:inline="javascript">
+    // Movie titles chart
+    var ctx1 = document.getElementById('movieTitlesChart').getContext('2d');
+    var movieTitlesChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: /*[[${movieTitles}]]*/ [],
+            datasets: [{
+                label: 'Movie Titles',
+                data: /*[[${moviePopularities}]]*/ [],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Movie popularities chart
+    var ctx2 = document.getElementById('moviePopularitiesChart').getContext('2d');
+    var moviePopularitiesChart = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: /*[[${movieTitles}]]*/ [],
+            datasets: [{
+                label: 'Movie Popularities',
+                data: /*[[${moviePopularities}]]*/ [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Top Rated Movies Chart
+    var ctx3 = document.getElementById('topRatedMoviesChart').getContext('2d');
+    var topRatedMoviesChart = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: /*[[${topRatedMovieTitles}]]*/ [],
+            datasets: [{
+                label: 'Top Rated Movies',
+                data: /*[[${topRatedMovieVoteAverages}]]*/ [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Upcoming Movies Chart
+    var ctx4 = document.getElementById('upcomingMoviesChart').getContext('2d');
+    var upcomingMoviesChart = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: /*[[${upcomingMovieTitles}]]*/ [],
+            datasets: [{
+                label: 'Upcoming Movies',
+                data: /*[[${upcomingMovieDates}]]*/ [],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
