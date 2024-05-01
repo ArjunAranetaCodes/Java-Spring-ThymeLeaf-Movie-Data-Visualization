@@ -1,5 +1,3 @@
-Sure, here's an example of a README.md file for the GitHub repository of this Spring Boot application:
-
 # Popular, Top Rated, and Upcoming Movies
 
 This is a Spring Boot application that fetches movie data from the TMDb (The Movie Database) API and displays popular, top-rated, and upcoming movies using data visualizations and a responsive layout.
@@ -73,6 +71,3 @@ If you find any issues or have suggestions for improvements, feel free to open a
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
-
-This README.md file provides an overview of the application, its features, the prerequisites, and the steps to get the application up and running. It also includes information about the technologies used and how to contribute to the project. You can customize this README.md file further to fit your specific project requirements.
